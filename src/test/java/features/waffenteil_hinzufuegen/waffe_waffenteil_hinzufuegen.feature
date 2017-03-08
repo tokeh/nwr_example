@@ -18,12 +18,14 @@ Feature: Waffe.Waffenteil_hinzufuegen
 	And für alle Waffenteile und die Waffe ist die gleiche Behörde zuständig
 
   # Happy Paths
+  @happy_path
   Scenario: Waffenteil wird einer Waffe erfolgreich hinzugefügt
     Given eine gültige Waffe im Register
     And ein gültiges Waffenteil im Register
     When Waffenteil mit der NWR-ID T2017-01-13-1234561-B der Waffe mit der NWR-ID W2017-01-13-1234560-A hinzugefügt wird
     Then erhält die absendende Behörde eine XWaffe-konforme Erfolgsmeldung (NWR-ID des neu angelegten Aktivitätsobjekts und Fehlerliste ist leer)
 
+  @happy_path
   Scenario: Mehrere Waffenteile werden einer Waffe erfolgreich hinzugefügt
     Given eine gültige Waffe im Register
     And mehrere Waffenteile:
@@ -37,14 +39,17 @@ Feature: Waffe.Waffenteil_hinzufuegen
     Then erhält die absendende Behörde eine XWaffe-konforme Erfolgsmeldung (NWR-ID des neu angelegten Aktivitätsobjekts und Fehlerliste ist leer)
 
   # Fehlerfälle
+  @error_path
   Scenario: Hinzufügen von Waffenteil schlägt fehl wegen falscher Waffen-ID
     When das Waffenteil mit der NWR-ID T2017-01-13-1234561-B der Waffe mit der Waffen-NWR-ID W2017-01-13-1234560-X hinzugefügt wird
     Then erhält die absendende Behörde eine XWaffe-konforme Fehlermeldung, dass die Waffe nicht gefunden wurde
 
+  @error_path
   Scenario: Hinzufügen von Waffenteil schlägt fehl wegen falscher Waffenteil-ID
     When das Waffenteil mit der NWR-ID T2017-01-13-1234561-X der Waffe mit der Waffen-NWR-ID W2017-01-13-1234560-A hinzugefügt wird
     Then erhält die absendende Behörde eine XWaffe-konforme Fehlermeldung, dass das Waffenteil nicht gefunden wurde
 
+  @error_path
   Scenario: Hinzufügen von mehreren Waffenteilen schlägt fehl, wenn mindestens ein Waffenteil gegen die Regeln verstößt
     And mehrere Waffenteile:
       | nwr_id_waffenteil     |
@@ -53,15 +58,20 @@ Feature: Waffe.Waffenteil_hinzufuegen
     When die Waffenteile der Waffe mit der Waffen-NWR-ID W2017-01-13-1234560-A hinzugefügt werden
     Then erhält die absendende Behörde eine XWaffe-konforme Fehlermeldung, dass das Waffenteil XYZ bereits eine Zuordnung mit "verbaut_in" enthält
 
+  @error_path
   Scenario: Hinzufügen von Waffenteil schlägt fehl wegen falschem Waffenstatus
 
+  @error_path
   Scenario: Hinzufügen von Waffenteil schlägt fehl wegen falscher Zuständigkeit der meldenden Behörde für die Waffe
 
+  @error_path
   Scenario: Hinzufügen von Waffenteil schlägt fehl wegen falscher Zuständigkeit der meldenden Behörde für die hinzuzufügenden Waffenteile
 
+  @error_path
   Scenario: Hinzufügen von Waffenteil schlägt fehl wegen vorhandenem Attribut 'Zuordnungsart' 'verbaut_in' im hinzuzufügenden Waffenteil
     Given ein Waffenteil XYZ mit einer Zuordnungsart "verbaut_in"
 	When Waffenteil XYZ soll zur Waffe hinzugefügt werden
 	Then erhält die absendende Behörde eine XWaffe-konforme Fehlermeldung, dass das Waffenteil bereits eine Zuordnungsart "verbaut_in" enthält
 
+  @error_path
   Scenario: Hinzufügen von Waffenteil schlägt fehl, da Waffe und hinzuzufügende Waffenteile der selben Erlaubnis zugeordnet sind

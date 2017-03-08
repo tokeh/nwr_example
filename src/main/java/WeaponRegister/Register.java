@@ -19,6 +19,10 @@ public class Register {
         return this.weapons.get(weaponId);
     }
 
+    public Waffenteil getWeaponPart(final String weaponPartId) {
+        return this.weaponParts.get(weaponPartId);
+    }
+
     public boolean addLicense(final Erlaubnis license) {
         if (this.licenses.containsKey(license.getId())) {
             return false;
