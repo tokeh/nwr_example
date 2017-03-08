@@ -15,12 +15,21 @@ public class Register {
         this.weaponParts = new HashMap<String, Waffenteil>();
     }
 
-    public Waffe getWeapon(final String id) {
-        return this.weapons.get(id);
+    public Waffe getWeapon(final String weaponId) {
+        return this.weapons.get(weaponId);
     }
 
-    public boolean addWeapon(final String licenseId, final Waffe weapon) {
-        if (this.weapons.containsKey(weapon)) {
+    public boolean addLicense(final Erlaubnis license) {
+        if (this.licenses.containsKey(license.getId())) {
+            return false;
+        } else {
+            this.licenses.put(license.getId(), license);
+            return true;
+        }
+    }
+
+    public boolean addWeapon(final Waffe weapon) {
+        if (this.weapons.containsKey(weapon.getId())) {
             return false;
         } else {
             this.weapons.put(weapon.getId(), weapon);
@@ -35,5 +44,12 @@ public class Register {
             this.weaponParts.put(weaponPart.getId(), weaponPart);
             return true;
         }
+    }
+
+    public boolean addWeaponPartToWeapon(final String weaponId, final String weaponPartId) {
+        Waffe weapon = this.weapons.get(weaponId);
+        Waffenteil part = this.weaponParts.get(weaponPartId);
+
+        return weapon.addWeaponPart(part);
     }
 }

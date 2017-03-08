@@ -24,14 +24,6 @@ public class Waffe {
         return this.administration;
     }
 
-    public int getStatusCode() {
-        return this.statusCode;
-    }
-
-    public boolean containsWeaponPart(final String id) {
-        return this.weaponParts.containsKey(id);
-    }
-
     public boolean addWeaponPart(final Waffenteil weaponPart) {
         if (this.weaponParts.containsKey(weaponPart.getId())) {
             return false;

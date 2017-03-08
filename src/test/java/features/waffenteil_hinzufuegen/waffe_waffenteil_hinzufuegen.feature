@@ -19,10 +19,13 @@ Feature: Waffe.Waffenteil_hinzufuegen
 
   # Happy Paths
   Scenario: Waffenteil wird einer Waffe erfolgreich hinzugefügt
+    Given eine gültige Waffe im Register
+    And ein gültiges Waffenteil im Register
     When Waffenteil mit der NWR-ID T2017-01-13-1234561-B der Waffe mit der NWR-ID W2017-01-13-1234560-A hinzugefügt wird
     Then erhält die absendende Behörde eine XWaffe-konforme Erfolgsmeldung (NWR-ID des neu angelegten Aktivitätsobjekts und Fehlerliste ist leer)
 
   Scenario: Mehrere Waffenteile werden einer Waffe erfolgreich hinzugefügt
+    Given eine gültige Waffe im Register
     And mehrere Waffenteile:
       | nwr_id_waffenteil     |
       | T2017-01-13-1234561-B | 
