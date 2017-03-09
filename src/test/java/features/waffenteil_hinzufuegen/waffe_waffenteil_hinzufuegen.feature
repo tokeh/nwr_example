@@ -14,8 +14,8 @@ Feature: Waffe.Waffenteil_hinzufuegen
     And ein Waffenteil mit der NWR-ID T2017-01-13-1234561-B (Ein gültiges Waffenteil ohne Zuordnung "verbaut_in")
     And ein Waffenteil mit der NWR-ID T2017-01-13-1234562-C (Ein gültiges Waffenteil ohne Zuordnung "verbaut_in")
     And ein Waffenteil mit der NWR-ID XYZ (mit Zuordnung "verbaut_in")
-	And alle Waffenteile und die Waffe sind der Erlaubnis E2017-01-13-1234560-A zugewiesen
-	And für alle Waffenteile und die Waffe ist die gleiche Behörde zuständig
+    And alle Waffenteile und die Waffe sind der Erlaubnis E2017-01-13-1234560-A zugewiesen
+    And für alle Waffenteile und die Waffe ist die gleiche Behörde zuständig
 
   # Happy Paths
   @happy_path
